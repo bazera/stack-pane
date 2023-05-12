@@ -1,0 +1,33 @@
+{
+  "name": "jetrepo-dummy-front-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/jetrepo-dummy-front-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/jetrepo-dummy-front-e2e/cypress.config.ts",
+        "devServerTarget": "jetrepo-dummy-front:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "jetrepo-dummy-front:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "jetrepo-dummy-front:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/jetrepo-dummy-front-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["jetrepo-dummy-front"]
+}
