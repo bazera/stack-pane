@@ -30,7 +30,6 @@ export class StackPaneService {
 
   getLayer(outlet: string) {
     const stack = this._outletStack.getValue();
-    console.log(stack);
     return stack.find((i) => i.outlet === outlet);
   }
 
@@ -57,8 +56,6 @@ export class StackPaneService {
     if (!stack.length) {
       return;
     }
-
-    console.log(stack.map((x) => x.outlet));
 
     const outlets = stack
       .map((s) => s.outlet)
