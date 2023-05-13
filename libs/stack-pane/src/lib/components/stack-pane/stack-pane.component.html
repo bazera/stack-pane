@@ -8,12 +8,16 @@
   <ng-container [ngSwitch]="layer?.type">
     <ng-container *ngSwitchCase="typeSet.Sidenav">
       <div class="sidenav" (click)="$event.stopPropagation()" #sidenav>
-        <router-outlet></router-outlet>
+        <jet-stack-pane-sidenav>
+          <router-outlet></router-outlet>
+        </jet-stack-pane-sidenav>
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="typeSet.Dialog">
       <div class="dialog" (click)="$event.stopPropagation()" #dialog>
-        <router-outlet></router-outlet>
+        <jet-stack-pane-dialog>
+          <router-outlet></router-outlet>
+        </jet-stack-pane-dialog>
       </div>
     </ng-container>
   </ng-container>

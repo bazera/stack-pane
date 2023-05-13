@@ -12,11 +12,21 @@ import { stackPaneAnimations as animations } from '../../stack-pane.animations';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { StackPaneLayer, StackPaneType } from '../../stack-pane.model';
 import { StackPaneService } from '../../stack-pane.service';
+import {
+  StackPaneDialogComponent,
+  StackPaneSidenavComponent,
+} from '../stack-pane-types';
 
 @Component({
   selector: 'jet-stack-pane',
   standalone: true,
-  imports: [CommonModule, RouterModule, StackPaneComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    StackPaneComponent,
+    StackPaneSidenavComponent,
+    StackPaneDialogComponent,
+  ],
   templateUrl: './stack-pane.component.html',
   styleUrls: ['./stack-pane.component.scss'],
 })
