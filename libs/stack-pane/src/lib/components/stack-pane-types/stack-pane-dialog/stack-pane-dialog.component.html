@@ -1,1 +1,8 @@
-<ng-content></ng-content>
+<header>
+  <h2>{{ title }}</h2>
+  <button (click)="close()">X</button>
+</header>
+<hr />
+<main>
+  <ng-content></ng-content>
+</main>

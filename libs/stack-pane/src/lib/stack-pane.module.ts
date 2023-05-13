@@ -3,11 +3,23 @@ import { NavigationEnd, Router } from '@angular/router';
 import { StackPaneConfig } from './stack-pane.model';
 import { StackPaneService } from './stack-pane.service';
 import { stackPaneRouteFactory } from './stock-pane-routes.factory';
-import { StackPaneContainerComponent } from './components';
+import {
+  StackPaneContainerComponent,
+  StackPaneDialogComponent,
+  StackPaneSidenavComponent,
+} from './components';
 
 @NgModule({
-  imports: [StackPaneContainerComponent],
-  exports: [StackPaneContainerComponent],
+  imports: [
+    StackPaneContainerComponent,
+    StackPaneDialogComponent,
+    StackPaneSidenavComponent,
+  ],
+  exports: [
+    StackPaneContainerComponent,
+    StackPaneDialogComponent,
+    StackPaneSidenavComponent,
+  ],
 })
 export class StackPaneModule {
   static forRoot(

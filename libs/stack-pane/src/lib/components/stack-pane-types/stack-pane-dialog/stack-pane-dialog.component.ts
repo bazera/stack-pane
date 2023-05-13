@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { StackPaneService } from '../../../stack-pane.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { StackPaneService } from '../../../stack-pane.service';
   styleUrls: ['./stack-pane-dialog.component.scss'],
 })
 export class StackPaneDialogComponent {
+  @Input() title: string | undefined;
+
   constructor(private service: StackPaneService) {}
 
   close() {
