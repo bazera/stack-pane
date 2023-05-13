@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
-
+import { StackPaneModule } from '@jetrepo-dummy/stack-pane';
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule, StackPaneModule],
   selector: 'jetrepo-dummy-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

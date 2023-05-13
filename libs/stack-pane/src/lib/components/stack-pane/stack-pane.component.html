@@ -1,0 +1,20 @@
+<div
+  class="backdrop"
+  [style.z-index]="panelZIndex"
+  [ngClass]="getBackdropClass()"
+  (click)="hide()"
+  #backdrop
+>
+  <ng-container [ngSwitch]="layer?.type">
+    <ng-container *ngSwitchCase="typeSet.Sidenav">
+      <div class="sidenav" (click)="$event.stopPropagation()" #sidenav>
+        <router-outlet></router-outlet>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="typeSet.Dialog">
+      <div class="dialog" (click)="$event.stopPropagation()" #dialog>
+        <router-outlet></router-outlet>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@jetrepo-dummy/jet-stack-pane": ["libs/jet-stack-pane/src/index.ts"],
+      "@jetrepo-dummy/stack-pane": ["libs/stack-pane/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
