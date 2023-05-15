@@ -2,7 +2,7 @@
   class="backdrop"
   [style.z-index]="panelZIndex"
   [ngClass]="getBackdropClass()"
-  (click)="hide()"
+  (click)="close()"
   #backdrop
 >
   <ng-container [ngSwitch]="layer?.type">

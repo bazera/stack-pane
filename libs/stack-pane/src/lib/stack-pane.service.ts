@@ -4,7 +4,12 @@ import {
   StackPaneLayer,
   StackPaneType,
 } from './stack-pane.model';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationExtras,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 import { getComponentNameKebab } from './utils.fn';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
@@ -19,9 +24,32 @@ export class StackPaneService {
     return this._outletStack.pipe(map((stack) => stack.map((i) => i.outlet)));
   }
 
+  get outletStackSnapshot() {
+    const stack = this._outletStack.getValue();
+    return stack.map((i) => i.outlet);
+  }
+
   config: StackPaneConfig | undefined;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  private _isBroweserNavigation = false;
+  get isBroweserNavigation() {
+    return this._isBroweserNavigation;
+  }
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    this.router.events.subscribe((event) => {
+      if (!(event instanceof NavigationStart)) {
+        return;
+      }
+
+      if (event.navigationTrigger === 'popstate') {
+        this._isBroweserNavigation = true;
+        return;
+      }
+
+      this._isBroweserNavigation = false;
+    });
+  }
 
   getLayerIndex(outlet: string) {
     const stack = this._outletStack.getValue();

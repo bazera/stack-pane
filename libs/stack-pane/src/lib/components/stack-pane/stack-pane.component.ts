@@ -131,7 +131,7 @@ export class StackPaneComponent implements OnInit, AfterViewInit {
     return this._panelLeaveAnimation$.asObservable();
   }
 
-  hide() {
+  close() {
     this.stackPaneService.close();
   }
 

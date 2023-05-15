@@ -12,13 +12,14 @@ const getStackPaneGurads = (outlet: string) => {
   return {
     canDeactivate: [
       (component: StackPaneComponent) => {
-        const stackPane = inject(StackPaneService);
+        const service = inject(StackPaneService);
 
-        // leave animation has some issues
+        if (service.isBroweserNavigation) {
+          service.remove();
+          return true;
+        }
 
-        return component
-          .playLeaveAnimation()
-          .pipe(tap(() => stackPane.remove()));
+        return component.playLeaveAnimation().pipe(tap(() => service.remove()));
       },
     ],
     canActivate: [
