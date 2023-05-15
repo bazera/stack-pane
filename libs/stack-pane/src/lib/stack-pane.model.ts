@@ -1,7 +1,7 @@
 import { Type } from '@angular/core';
 
 export enum StackPaneType {
-  Sidenav,
+  Drawer,
   Dialog,
 }
 

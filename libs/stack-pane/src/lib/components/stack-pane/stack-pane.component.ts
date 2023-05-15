@@ -14,7 +14,7 @@ import { StackPaneLayer, StackPaneType } from '../../stack-pane.model';
 import { StackPaneService } from '../../stack-pane.service';
 import {
   StackPaneDialogComponent,
-  StackPaneSidenavComponent,
+  StackPaneDrawerComponent,
 } from '../stack-pane-types';
 
 @Component({
@@ -24,14 +24,14 @@ import {
     CommonModule,
     RouterModule,
     StackPaneComponent,
-    StackPaneSidenavComponent,
+    StackPaneDrawerComponent,
     StackPaneDialogComponent,
   ],
   templateUrl: './stack-pane.component.html',
   styleUrls: ['./stack-pane.component.scss'],
 })
 export class StackPaneComponent implements OnInit, AfterViewInit {
-  @ViewChild('sidenav') sidenav: ElementRef | undefined;
+  @ViewChild('drawer') drawer: ElementRef | undefined;
   @ViewChild('dialog') dialog: ElementRef | undefined;
   @ViewChild('backdrop') backdrop: ElementRef | undefined;
 
@@ -79,21 +79,21 @@ export class StackPaneComponent implements OnInit, AfterViewInit {
         });
         break;
       }
-      case StackPaneType.Sidenav: {
-        const sidenavEnterAnimationBuilder = this.animationBuilder.build(
-          animations.sidenav.enter
+      case StackPaneType.Drawer: {
+        const drawerEnterAnimationBuilder = this.animationBuilder.build(
+          animations.drawer.enter
         );
 
-        this.panelEnterAnimation = sidenavEnterAnimationBuilder.create(
-          this.sidenav?.nativeElement
+        this.panelEnterAnimation = drawerEnterAnimationBuilder.create(
+          this.drawer?.nativeElement
         );
 
-        const sidenavLeaveAnimationBuilder = this.animationBuilder.build(
-          animations.sidenav.leave
+        const drawerLeaveAnimationBuilder = this.animationBuilder.build(
+          animations.drawer.leave
         );
 
-        this.panelLeaveAnimation = sidenavLeaveAnimationBuilder.create(
-          this.sidenav?.nativeElement
+        this.panelLeaveAnimation = drawerLeaveAnimationBuilder.create(
+          this.drawer?.nativeElement
         );
 
         this.panelLeaveAnimation.onDone(() => {
@@ -144,7 +144,7 @@ export class StackPaneComponent implements OnInit, AfterViewInit {
 
   getBackdropClass() {
     return {
-      hasSidenav: this.layer?.type === StackPaneType.Sidenav,
+      hasDrawer: this.layer?.type === StackPaneType.Drawer,
       hasDialog: this.layer?.type === StackPaneType.Dialog,
     };
   }

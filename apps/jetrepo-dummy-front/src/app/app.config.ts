@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
         componentRegistry: [
           {
             component: AddFieldComponent,
-            type: StackPaneType.Sidenav,
+            type: StackPaneType.Drawer,
           },
           {
             component: ChooseFieldDialogComponent,
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
           },
           {
             component: ManageFieldsComponent,
-            type: StackPaneType.Sidenav,
+            type: StackPaneType.Drawer,
           },
         ],
       })

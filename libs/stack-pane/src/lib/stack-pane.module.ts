@@ -6,19 +6,19 @@ import { stackPaneRouteFactory } from './stock-pane-routes.factory';
 import {
   StackPaneContainerComponent,
   StackPaneDialogComponent,
-  StackPaneSidenavComponent,
+  StackPaneDrawerComponent,
 } from './components';
 
 @NgModule({
   imports: [
     StackPaneContainerComponent,
     StackPaneDialogComponent,
-    StackPaneSidenavComponent,
+    StackPaneDrawerComponent,
   ],
   exports: [
     StackPaneContainerComponent,
     StackPaneDialogComponent,
-    StackPaneSidenavComponent,
+    StackPaneDrawerComponent,
   ],
 })
 export class StackPaneModule {

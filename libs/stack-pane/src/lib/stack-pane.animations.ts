@@ -1,7 +1,7 @@
 import { animate, style } from '@angular/animations';
 
 export const stackPaneAnimations = {
-  sidenav: {
+  drawer: {
     enter: [
       style({ transform: 'translateX(100%)' }),
       animate('0.2s ease-out', style({ transform: 'translateX(0%)' })),

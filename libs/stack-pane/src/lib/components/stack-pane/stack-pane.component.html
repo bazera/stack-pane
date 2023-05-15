@@ -6,8 +6,8 @@
   #backdrop
 >
   <ng-container [ngSwitch]="layer?.type">
-    <ng-container *ngSwitchCase="typeSet.Sidenav">
-      <div class="sidenav" (click)="$event.stopPropagation()" #sidenav>
+    <ng-container *ngSwitchCase="typeSet.Drawer">
+      <div class="drawer" (click)="$event.stopPropagation()" #drawer>
         <router-outlet></router-outlet>
       </div>
     </ng-container>

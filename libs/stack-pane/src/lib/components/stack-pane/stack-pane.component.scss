@@ -5,7 +5,7 @@
   height: 100%;
   display: flex;
 
-  &.hasSidenav {
+  &.hasDrawer {
     justify-content: flex-end;
   }
 
@@ -14,7 +14,7 @@
     align-items: center;
   }
 
-  .sidenav {
+  .drawer {
     background: white;
     height: 100%;
     width: 80%;
