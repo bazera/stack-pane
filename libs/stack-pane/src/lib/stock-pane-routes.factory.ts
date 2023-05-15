@@ -30,7 +30,7 @@ const getStackPaneGurads = (outlet: string) => {
         );
 
         if (layer) {
-          inject(StackPaneService).add(outlet, layer.type);
+          service.add(outlet, layer.type);
         }
       },
     ],
