@@ -1,3 +1,30 @@
 <jet-stack-pane-drawer title="Manage Fields">
-  <button (click)="chooseFieldType()">choose field type</button>
+  <div class="content">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      mat-raised-button
+      color="primary"
+      (click)="chooseFieldType()"
+    >
+      Add Field
+    </button>
+    <ng-container *ngIf="fieldsService.fields$ | async as fields">
+      <ng-container *ngIf="fields?.length; else empty">
+        <div *ngFor="let field of fields" class="field">
+          <div>{{ field.name }}</div>
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            mat-raised-button
+            color="secondary"
+            (click)="configureField(field)"
+          >
+            Configure
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #empty> <div>There are no fields added</div> </ng-template>
+  </div>
 </jet-stack-pane-drawer>

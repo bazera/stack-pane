@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="forms">
+    <div *ngIf="addFieldForm">
+      <div class="add-field" *ngIf="addFieldForm && addFieldFields">
+        <form [formGroup]="addFieldForm" (ngSubmit)="addField()">
+          <formly-form
+            [model]="addFieldModel"
+            [fields]="addFieldFields"
+            [form]="addFieldForm"
+          ></formly-form>
+
+          <button
+            type="submit"
+            class="btn btn-primary submit-button"
+            mat-raised-button
+            color="primary"
+            [disabled]="!addFieldForm.valid"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="preview">
+    <span class="title"><b>Field Preview</b></span>
+    <span class="desc"
+      >This is how your field will appear in Entity add / edit forms.</span
+    >
+    <ng-container *ngIf="preview$ | async as preview">
+      <formly-form [fields]="preview"></formly-form>
+    </ng-container>
+  </div>
+</div>

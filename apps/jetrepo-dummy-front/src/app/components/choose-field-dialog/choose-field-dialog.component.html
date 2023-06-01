@@ -1,3 +1,13 @@
-<jet-stack-pane-dialog title="Choose Field Type">
-  <button (click)="chooseNumber()">number</button>
+<jet-stack-pane-dialog title="Select Field to Add">
+  <section class="field-types">
+    <button
+      type="submit"
+      class="btn btn-secondary"
+      mat-raised-button
+      color="secondary"
+      (click)="chooseType(fieldType.Text)"
+    >
+      Text
+    </button>
+  </section>
 </jet-stack-pane-dialog>

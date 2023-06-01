@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="forms">
+    <div *ngIf="configForm">
+      <div *ngIf="configForm && configFormFields">
+        <button (click)="setTab('settings')">Settings</button>
+        <button (click)="setTab('values')">Values</button>
+        <button (click)="setTab('validation')">Validation</button>
+        <button (click)="setTab('appearence')">Appearence</button>
+
+        <form [formGroup]="configForm" (ngSubmit)="save()">
+          <ng-container [ngSwitch]="currentTab">
+            <ng-container *ngSwitchCase="'settings'">
+              <formly-form
+                [model]="configFormModels?.settings"
+                [fields]="configFormFields.settings"
+                [form]="configForm"
+              ></formly-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'values'">
+              <formly-form
+                [model]="configFormModels?.values"
+                [fields]="configFormFields.values"
+                [form]="configForm"
+              ></formly-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'validation'">
+              <formly-form
+                [model]="configFormModels?.validation"
+                [fields]="configFormFields.validation"
+                [form]="configForm"
+              ></formly-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'appearence'">
+              <formly-form
+                [model]="configFormModels?.appearance"
+                [fields]="configFormFields.appearance"
+                [form]="configForm"
+              ></formly-form>
+            </ng-container>
+          </ng-container>
+          <button
+            type="submit"
+            class="btn btn-primary submit-button"
+            mat-raised-button
+            color="primary"
+            [disabled]="!configForm.valid"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="preview">
+    <span class="title"><b>Field Preview</b></span>
+    <span class="desc"
+      >This is how your field will appear in Entity add / edit forms.</span
+    >
+    <ng-container *ngIf="preview$ | async as preview">
+      <formly-form [fields]="preview"></formly-form>
+    </ng-container>
+  </div>
+</div>

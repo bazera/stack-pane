@@ -99,7 +99,7 @@ export class StackPaneService {
     });
   }
 
-  open(component: Type<unknown>) {
+  open(component: Type<unknown>, extras?: NavigationExtras) {
     if (
       !this.config?.componentRegistry
         ?.map((x) => x.component)
@@ -111,8 +111,9 @@ export class StackPaneService {
     }
 
     const componentNameKebeb = getComponentNameKebab(component.name);
-    this.router.navigate([
-      { outlets: { [componentNameKebeb]: componentNameKebeb } },
-    ]);
+    this.router.navigate(
+      [{ outlets: { [componentNameKebeb]: componentNameKebeb } }],
+      extras
+    );
   }
 }

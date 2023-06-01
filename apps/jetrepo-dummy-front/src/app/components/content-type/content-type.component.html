@@ -1,1 +1,17 @@
-<button (click)="openManageFields()">Manage Fields</button>
+<button
+  type="submit"
+  class="btn btn-primary"
+  mat-raised-button
+  color="primary"
+  (click)="openManageFields()"
+>
+  Manage Fields
+</button>
+<ng-container *ngIf="fieldsService.fields$ | async as fields">
+  <ng-container *ngIf="fields?.length; else empty">
+    <div *ngFor="let field of fields" class="field">
+      <formly-form [fields]="field.fieldConfig"></formly-form>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-template #empty> <div>There are no fields added</div> </ng-template>

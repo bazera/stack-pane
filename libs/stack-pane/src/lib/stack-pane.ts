@@ -12,7 +12,7 @@ export class StackPane {
     this.service.close(extras);
   }
 
-  open(component: Type<unknown>) {
-    this.service.open(component);
+  open(component: Type<unknown>, extras?: NavigationExtras) {
+    this.service.open(component, extras);
   }
 }

@@ -1,19 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { StackPane, StackPaneDialogComponent } from '@jetrepo-dummy/stack-pane';
-import { AddFieldComponent } from '../add-field/add-field.component';
+import { FieldType } from '../../field/field.model';
+import { MatButtonModule } from '@angular/material/button';
+import { AddFieldContainerComponent } from '../add-field-container/add-field-container.component';
 
 @Component({
   selector: 'jetrepo-dummy-choose-field-dialog',
   standalone: true,
-  imports: [CommonModule, StackPaneDialogComponent],
+  imports: [CommonModule, StackPaneDialogComponent, MatButtonModule],
   templateUrl: './choose-field-dialog.component.html',
-  styleUrls: ['./choose-field-dialog.component.css'],
+  styleUrls: ['./choose-field-dialog.component.scss'],
 })
 export class ChooseFieldDialogComponent {
+  fieldType = FieldType;
+
   constructor(private stackPane: StackPane) {}
 
-  chooseNumber() {
-    this.stackPane.open(AddFieldComponent);
+  chooseType(type: FieldType) {
+    this.stackPane.open(AddFieldContainerComponent, { queryParams: { type } });
   }
 }
