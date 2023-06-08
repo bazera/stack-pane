@@ -6,6 +6,11 @@ import {
   FieldType,
 } from '../../field.model';
 import { TextFieldAddNew, TextFieldConfigFormModel } from './text.model';
+import {
+  FieldValidationLimitCharOption,
+  FieldValidatorRegexType,
+  validations,
+} from '../../validation/validations';
 
 export const getTextFieldModelDefault = (): TextFieldConfigFormModel => {
   return {
@@ -29,13 +34,25 @@ export const getTextFieldModelDefault = (): TextFieldConfigFormModel => {
     validation: {
       required: {
         enabled: false,
-        errorMessage: '',
-        value: false,
       },
-      maxLength: {
+      unique: {
         enabled: false,
-        errorMessage: '',
-        value: 0,
+      },
+      limitChar: {
+        enabled: false,
+        value: {
+          min: undefined,
+          max: undefined,
+          option: FieldValidationLimitCharOption.MinMax,
+        },
+      },
+      regex: {
+        enabled: false,
+        value: {
+          type: FieldValidatorRegexType.Custom,
+          pattern: new RegExp(''),
+          flag: '',
+        },
       },
     },
   };
@@ -64,13 +81,10 @@ export const getTextFieldConfigFields = (): FieldConfigFormFields => {
     ],
     values: [],
     validation: [
-      {
-        key: 'required.value',
-        type: 'checkbox',
-        props: {
-          label: 'Required',
-        },
-      },
+      validations.required,
+      validations.unique,
+      validations.limitChar,
+      validations.regex,
     ],
     appearance: [
       {

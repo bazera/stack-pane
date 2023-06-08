@@ -1,6 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
+import { FieldValidationModel } from './validation/validations';
 
 export enum FieldType {
   Text = 'Text',
@@ -19,40 +20,6 @@ export interface FieldConfigFormFields {
   validation: FormlyFieldConfig[];
   appearance: FormlyFieldConfig[];
 }
-
-export interface FieldValidation {
-  required: {
-    enabled: boolean;
-    value: boolean;
-    errorMessage: string;
-  };
-  unique: {
-    enabled: boolean;
-    value: boolean;
-    errorMessage: string;
-  };
-  minValue: {
-    enabled: boolean;
-    value: number;
-    errorMessage: string;
-  };
-  maxValue: {
-    enabled: boolean;
-    value: number;
-    errorMessage: string;
-  };
-  minLength: {
-    enabled: boolean;
-    value: number;
-    errorMessage: string;
-  };
-  maxLength: {
-    enabled: boolean;
-    value: number;
-    errorMessage: string;
-  };
-}
-
 export interface FieldSettingsBase {
   name: string;
   key: string;
@@ -86,7 +53,7 @@ export interface FieldDefinition<T extends FieldConfigFormModel> {
 export interface FieldConfigFormModel {
   settings: FieldSettingsBase;
   values: Record<string, unknown>;
-  validation: Partial<FieldValidation>;
+  validation: Partial<FieldValidationModel>;
   appearance: FieldAppearanceBase;
 }
 

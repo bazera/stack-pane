@@ -1,0 +1,35 @@
+:host {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.container {
+  border: 1px solid gray;
+  border-radius: 6px;
+  overflow: hidden;
+
+  .header {
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+    cursor: pointer;
+
+    .validation {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .title {
+        font-size: 16px;
+      }
+
+      .description {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .form {
+    padding: 10px;
+  }
+}

@@ -23,3 +23,16 @@ h5 {
   margin: 0;
   padding: 0;
 }
+
+.validation-block {
+  border: 1px solid gray;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: block;
+
+  .inner-form {
+    display: block;
+    padding: 15px;
+  }
+}

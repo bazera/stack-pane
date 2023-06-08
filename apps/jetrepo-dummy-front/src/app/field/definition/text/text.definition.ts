@@ -8,6 +8,10 @@ import {
 } from './text.config';
 import { TextFieldAddNew, TextFieldConfigFormModel } from './text.model';
 import { Field, FieldType } from '../../field.model';
+import {
+  FieldValidationLimitChar,
+  FieldValidationPattern,
+} from '../../validation/validations';
 
 export class TextFieldDefinition extends AbstractFieldDefinition {
   configFormModels = getTextFieldModelDefault();
@@ -63,6 +67,10 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
   generateFieldFromConfigModel(
     value: TextFieldConfigFormModel
   ): FormlyFieldConfig[] {
+    const validation = value.validation;
+
+    console.log(validation);
+
     return [
       {
         key: value.settings.key,
@@ -70,7 +78,18 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
         props: {
           label: value.settings.name,
           description: value.appearance.helpText,
-          required: value.validation.required?.value,
+          required: validation.required.enabled,
+          minLength: validation.limitChar.enabled
+            ? (validation.limitChar.value as FieldValidationLimitChar)?.min
+            : undefined,
+          maxLength: validation.limitChar.enabled
+            ? (validation.limitChar.value as FieldValidationLimitChar)?.max
+            : undefined,
+          pattern: validation.regex.enabled
+            ? new RegExp(
+                (validation.regex.value as FieldValidationPattern)?.pattern
+              )
+            : undefined,
         },
       },
     ];

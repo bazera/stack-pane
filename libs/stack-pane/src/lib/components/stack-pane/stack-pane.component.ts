@@ -139,7 +139,7 @@ export class StackPaneComponent implements OnInit, AfterViewInit {
     const outlet = this.routerOutlet.name;
     this.layer = this.stackPaneService.getLayer(outlet);
     this.layerDepth = this.stackPaneService.getLayerIndex(outlet) + 1;
-    this.panelZIndex = this.layerDepth * 9999;
+    this.panelZIndex = this.layerDepth + 1;
   }
 
   getBackdropClass() {

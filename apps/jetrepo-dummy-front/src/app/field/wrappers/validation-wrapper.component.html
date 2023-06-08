@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header" (click)="check()">
+    <div class="checkbox">
+      <mat-checkbox [ngModel]="enabled"></mat-checkbox>
+    </div>
+    <div class="validation">
+      <span class="title">{{ props.label }}</span>
+      <span class="description">{{ props.description }}</span>
+    </div>
+  </div>
+  <ng-container *ngIf="enabled && props['innerFields']">
+    <hr />
+    <div class="form">
+      <formly-form [fields]="props['innerFields']"></formly-form>
+    </div>
+  </ng-container>
+</div>

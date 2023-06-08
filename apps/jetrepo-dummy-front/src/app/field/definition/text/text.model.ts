@@ -4,6 +4,7 @@ import {
   FieldConfigFormModel,
   FieldSettingsBase,
 } from '../../field.model';
+import { FieldValidationModelProps } from '../../validation/validations';
 
 export interface TextFieldSettings extends FieldSettingsBase {
   isTitle: boolean;
@@ -26,6 +27,10 @@ export interface TextFieldConfigFormModel extends FieldConfigFormModel {
   settings: TextFieldSettings;
   values: TextFieldValues;
   appearance: TextFieldAppearance;
+  validation: Record<
+    'required' | 'unique' | 'limitChar' | 'regex',
+    FieldValidationModelProps
+  >;
 }
 
 export interface TextFieldAddNew extends FieldAddNewBase {
