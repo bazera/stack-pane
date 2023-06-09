@@ -5,12 +5,7 @@ import {
   FieldConfigFormFields,
   FieldType,
 } from '../../field.model';
-import { TextFieldAddNew, TextFieldConfigFormModel } from './text.model';
-import {
-  FieldValidationLimitCharOption,
-  FieldValidatorRegexType,
-  validations,
-} from '../../validation';
+import { validations } from '../../validation';
 
 export const getTextFieldConfigFields = (): FieldConfigFormFields => {
   return {
