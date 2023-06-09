@@ -36,25 +36,7 @@ export class AddFieldComponent implements OnInit {
   contentFields: FormlyFieldConfig[] = [];
   contentForm = new FormGroup({});
 
-  currentTab = 'settings';
-
-  private _field: FieldDefinition<FieldConfigFormModel> | undefined;
-
-  get addFieldForm(): FormGroup | undefined {
-    return this._field?.addFieldForm;
-  }
-
-  get addFieldFields(): FormlyFieldConfig[] | undefined {
-    return this._field?.addFieldFields;
-  }
-
-  get addFieldModel(): FieldAddNewBase | undefined {
-    return this._field?.addFieldModel;
-  }
-
-  get preview$(): Observable<FormlyFieldConfig[]> | undefined {
-    return this._field?.preview$;
-  }
+  fieldDefinition: FieldDefinition<FieldConfigFormModel> | undefined;
 
   constructor(
     private fieldFactory: FieldFactory,
@@ -62,16 +44,12 @@ export class AddFieldComponent implements OnInit {
     private stackPane: StackPane
   ) {}
 
-  setTab(tab: string) {
-    this.currentTab = tab;
-  }
-
   addField() {
-    if (!this._field || !this.type) {
+    if (!this.fieldDefinition || !this.type) {
       return;
     }
 
-    const field = this._field.create();
+    const field = this.fieldDefinition.create();
 
     this.fieldsService.addField(field);
     this.stackPane.close();
@@ -79,8 +57,8 @@ export class AddFieldComponent implements OnInit {
 
   ngOnInit() {
     if (this.type) {
-      this._field = this.fieldFactory.createField(this.type);
-      this._field.init();
+      this.fieldDefinition = this.fieldFactory.createField(this.type);
+      this.fieldDefinition.init();
     }
   }
 }

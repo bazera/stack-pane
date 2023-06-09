@@ -1,12 +1,18 @@
-<div class="container">
+<div class="container" *ngIf="fieldDefinition">
   <div class="forms">
-    <div *ngIf="addFieldForm">
-      <div class="add-field" *ngIf="addFieldForm && addFieldFields">
-        <form [formGroup]="addFieldForm" (ngSubmit)="addField()">
+    <div *ngIf="fieldDefinition.addFieldForm">
+      <div
+        class="add-field"
+        *ngIf="fieldDefinition.addFieldForm && fieldDefinition.addFieldFields"
+      >
+        <form
+          [formGroup]="fieldDefinition.addFieldForm"
+          (ngSubmit)="addField()"
+        >
           <formly-form
-            [model]="addFieldModel"
-            [fields]="addFieldFields"
-            [form]="addFieldForm"
+            [model]="fieldDefinition.addFieldModel"
+            [fields]="fieldDefinition.addFieldFields"
+            [form]="fieldDefinition.addFieldForm"
           ></formly-form>
 
           <button
@@ -14,7 +20,7 @@
             class="btn btn-primary submit-button"
             mat-raised-button
             color="primary"
-            [disabled]="!addFieldForm.valid"
+            [disabled]="!fieldDefinition.addFieldForm.valid"
           >
             Add
           </button>
@@ -27,7 +33,7 @@
     <span class="desc"
       >This is how your field will appear in Entity add / edit forms.</span
     >
-    <ng-container *ngIf="preview$ | async as preview">
+    <ng-container *ngIf="fieldDefinition.preview$ | async as preview">
       <formly-form [fields]="preview"></formly-form>
     </ng-container>
   </div>

@@ -5,6 +5,7 @@ import {
   FieldConfigFormFields,
   FieldConfigFormModel,
   FieldDefinition,
+  FieldTab,
 } from '../../field.model';
 import { FieldFactory } from '../../field.factory';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
@@ -36,25 +37,10 @@ export class ConfigureFieldComponent implements OnInit {
   contentFields: FormlyFieldConfig[] = [];
   contentForm = new FormGroup({});
 
-  currentTab = 'settings';
+  currentTab = FieldTab.Settings;
+  tabs = FieldTab;
 
-  private _field: FieldDefinition<FieldConfigFormModel> | undefined;
-
-  get configForm(): FormGroup | undefined {
-    return this._field?.configForm;
-  }
-
-  get configFormFields(): FieldConfigFormFields | undefined {
-    return this._field?.configFormFields;
-  }
-
-  get configFormModels(): FieldConfigFormModel | undefined {
-    return this._field?.configFormModels;
-  }
-
-  get preview$(): Observable<FormlyFieldConfig[]> | undefined {
-    return this._field?.preview$;
-  }
+  fieldDefinition: FieldDefinition<FieldConfigFormModel> | undefined;
 
   constructor(
     private fieldFactory: FieldFactory,
@@ -62,14 +48,14 @@ export class ConfigureFieldComponent implements OnInit {
     private stackPane: StackPane
   ) {}
 
-  setTab(tab: string) {
+  setTab(tab: FieldTab) {
     this.currentTab = tab;
   }
 
   save() {
     const fields = this.fieldsService.getFields().map((field) => {
-      if (this._field && field.key === this.field?.key) {
-        return this._field?.update();
+      if (this.fieldDefinition && field.key === this.field?.key) {
+        return this.fieldDefinition.update();
       }
 
       return field;
@@ -81,8 +67,10 @@ export class ConfigureFieldComponent implements OnInit {
 
   ngOnInit() {
     if (this.field) {
-      this._field = this.fieldFactory.createField(this.field.type);
-      this._field.init(this.field.configModel);
+      this.fieldDefinition = this.fieldFactory.createField(this.field.type);
+      this.fieldDefinition.init(this.field.configModel);
     }
+
+    console.log(this.fieldDefinition);
   }
 }

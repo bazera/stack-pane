@@ -1,40 +1,42 @@
-<div class="container">
+<div class="container" *ngIf="fieldDefinition">
   <div class="forms">
-    <div *ngIf="configForm">
-      <div *ngIf="configForm && configFormFields">
-        <button (click)="setTab('settings')">Settings</button>
-        <button (click)="setTab('values')">Values</button>
-        <button (click)="setTab('validation')">Validation</button>
-        <button (click)="setTab('appearence')">Appearence</button>
+    <div *ngIf="fieldDefinition.configForm">
+      <div
+        *ngIf="fieldDefinition.configForm && fieldDefinition.configFormFields"
+      >
+        <button (click)="setTab(tabs.Settings)">Settings</button>
+        <button (click)="setTab(tabs.Values)">Values</button>
+        <button (click)="setTab(tabs.Validation)">Validation</button>
+        <button (click)="setTab(tabs.Appearance)">Appearance</button>
 
-        <form [formGroup]="configForm" (ngSubmit)="save()">
+        <form [formGroup]="fieldDefinition.configForm" (ngSubmit)="save()">
           <ng-container [ngSwitch]="currentTab">
-            <ng-container *ngSwitchCase="'settings'">
+            <ng-container *ngSwitchCase="tabs.Settings">
               <formly-form
-                [model]="configFormModels?.settings"
-                [fields]="configFormFields.settings"
-                [form]="configForm"
+                [model]="fieldDefinition.configFormModels.settings"
+                [fields]="fieldDefinition.configFormFields.settings"
+                [form]="fieldDefinition.configForm"
               ></formly-form>
             </ng-container>
-            <ng-container *ngSwitchCase="'values'">
+            <ng-container *ngSwitchCase="tabs.Values">
               <formly-form
-                [model]="configFormModels?.values"
-                [fields]="configFormFields.values"
-                [form]="configForm"
+                [model]="fieldDefinition.configFormModels.values"
+                [fields]="fieldDefinition.configFormFields.values"
+                [form]="fieldDefinition.configForm"
               ></formly-form>
             </ng-container>
-            <ng-container *ngSwitchCase="'validation'">
+            <ng-container *ngSwitchCase="tabs.Validation">
               <formly-form
-                [model]="configFormModels?.validation"
-                [fields]="configFormFields.validation"
-                [form]="configForm"
+                [model]="fieldDefinition.configFormModels.validation"
+                [fields]="fieldDefinition.configFormFields.validation"
+                [form]="fieldDefinition.configForm"
               ></formly-form>
             </ng-container>
-            <ng-container *ngSwitchCase="'appearence'">
+            <ng-container *ngSwitchCase="tabs.Appearance">
               <formly-form
-                [model]="configFormModels?.appearance"
-                [fields]="configFormFields.appearance"
-                [form]="configForm"
+                [model]="fieldDefinition.configFormModels.appearance"
+                [fields]="fieldDefinition.configFormFields.appearance"
+                [form]="fieldDefinition.configForm"
               ></formly-form>
             </ng-container>
           </ng-container>
@@ -43,7 +45,7 @@
             class="btn btn-primary submit-button"
             mat-raised-button
             color="primary"
-            [disabled]="!configForm.valid"
+            [disabled]="!fieldDefinition.configForm.valid"
           >
             Save
           </button>
@@ -56,7 +58,7 @@
     <span class="desc"
       >This is how your field will appear in Entity add / edit forms.</span
     >
-    <ng-container *ngIf="preview$ | async as preview">
+    <ng-container *ngIf="fieldDefinition.preview$ | async as preview">
       <formly-form [fields]="preview"></formly-form>
     </ng-container>
   </div>

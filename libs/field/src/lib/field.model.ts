@@ -62,3 +62,10 @@ export interface FieldAddNewBase {
   name: string;
   key: string;
 }
+
+export enum FieldTab {
+  Settings,
+  Values,
+  Validation,
+  Appearance,
+}
