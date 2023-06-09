@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {
+  Field,
   FieldConfigFormFields,
   FieldConfigFormModel,
   FieldDefinition,
@@ -11,7 +12,7 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
-import { FieldListItem, FieldsService } from '../../../fields.service';
+import { FieldsService } from '../../../fields.service';
 import { StackPane } from '@jetrepo-dummy/stack-pane';
 
 @Component({
@@ -29,7 +30,7 @@ import { StackPane } from '@jetrepo-dummy/stack-pane';
   providers: [FieldFactory],
 })
 export class ConfigureFieldComponent implements OnInit {
-  @Input() field?: FieldListItem;
+  @Input() field?: Field<FieldConfigFormModel>;
 
   contentModel = {};
   contentFields: FormlyFieldConfig[] = [];

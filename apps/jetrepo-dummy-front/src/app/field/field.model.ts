@@ -34,6 +34,7 @@ export interface Field<T extends FieldConfigFormModel> {
   key: string;
   type: FieldType;
   configModel: T;
+  model: Record<string, unknown>;
   fieldConfig: FormlyFieldConfig[];
 }
 

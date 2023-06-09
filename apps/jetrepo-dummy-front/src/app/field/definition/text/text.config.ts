@@ -22,7 +22,6 @@ export const getTextFieldModelDefault = (): TextFieldConfigFormModel => {
     },
     values: {
       default: '',
-      mode: 'single',
     },
     appearance: {
       displayAs: POSSIBLE_APPEARANCES[FieldType.Text][0],
@@ -79,7 +78,15 @@ export const getTextFieldConfigFields = (): FieldConfigFormFields => {
         },
       },
     ],
-    values: [],
+    values: [
+      {
+        key: 'default',
+        type: 'input',
+        props: {
+          label: 'Default Value',
+        },
+      },
+    ],
     validation: [
       validations.required,
       validations.unique,

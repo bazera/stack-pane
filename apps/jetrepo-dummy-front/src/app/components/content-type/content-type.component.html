@@ -10,11 +10,11 @@
 <ng-container *ngIf="fieldsService.fields$ | async as fields">
   <ng-container *ngIf="fields?.length; else empty">
     <div *ngFor="let field of fields" class="field">
-      <formly-form [fields]="field.fieldConfig"></formly-form>
+      <formly-form
+        [fields]="field.fieldConfig"
+        [model]="field.model"
+      ></formly-form>
     </div>
   </ng-container>
 </ng-container>
 <ng-template #empty> <div>There are no fields added</div> </ng-template>
-<!--
-<formly-form [fields]="test2" [model]="model"></formly-form>
-<button (click)="hey()">HEY</button> -->

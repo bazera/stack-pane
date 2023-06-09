@@ -12,7 +12,6 @@ export interface TextFieldSettings extends FieldSettingsBase {
 }
 
 export interface TextFieldValues extends Record<string, unknown> {
-  mode: 'multi' | 'single';
   default: string;
 }
 

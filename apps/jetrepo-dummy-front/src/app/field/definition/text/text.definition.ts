@@ -25,6 +25,7 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
       name: this.addFieldModel.name,
       key: this.addFieldModel.key,
       type: FieldType.Text,
+      model: {},
       configModel: {
         ...this.configFormModels,
         settings: {
@@ -46,6 +47,10 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
       name: this.configFormModels.settings.name,
       key: this.configFormModels.settings.key,
       type: FieldType.Text,
+      model: {
+        [this.configFormModels.settings.key]:
+          this.configFormModels.values.default,
+      },
       configModel: this.configFormModels,
       fieldConfig: this.generateFieldFromConfigModel(this.configFormModels),
     };
@@ -68,8 +73,6 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
     value: TextFieldConfigFormModel
   ): FormlyFieldConfig[] {
     const validation = value.validation;
-
-    console.log(validation);
 
     return [
       {

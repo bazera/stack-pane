@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import { StackPane, StackPaneDrawerComponent } from '@jetrepo-dummy/stack-pane';
 import { ChooseFieldDialogComponent } from '../choose-field-dialog/choose-field-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
-import { FieldListItem, FieldsService } from '../../fields.service';
+import { FieldsService } from '../../fields.service';
 import { ConfigureFieldContainerComponent } from '../configure-field-container/configure-field-container.component';
+import { Field, FieldConfigFormModel } from '../../field/field.model';
 
 @Component({
   selector: 'jetrepo-dummy-manage-fields',
@@ -23,7 +24,7 @@ export class ManageFieldsComponent {
     this.stackPane.open(ChooseFieldDialogComponent);
   }
 
-  configureField({ key }: FieldListItem) {
+  configureField({ key }: Field<FieldConfigFormModel>) {
     this.stackPane.open(ConfigureFieldContainerComponent, {
       queryParams: { key },
     });

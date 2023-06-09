@@ -35,10 +35,6 @@ export class ValidationFormlyFieldComponent extends FieldType<FieldTypeConfig> {
     });
   }
 
-  test() {
-    console.log(this.model);
-  }
-
   check() {
     this.enabled = !this.enabled;
   }

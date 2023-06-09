@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { StackPaneDrawerComponent } from '@jetrepo-dummy/stack-pane';
 import { ConfigureFieldComponent } from '../../field/components/configure-field/configure-field.component';
-import { FieldListItem, FieldsService } from '../../fields.service';
+import { FieldsService } from '../../fields.service';
+import { Field, FieldConfigFormModel } from '../../field/field.model';
 
 @Component({
   selector: 'jetrepo-dummy-configure-field-container',
@@ -14,7 +15,7 @@ import { FieldListItem, FieldsService } from '../../fields.service';
 export class ConfigureFieldContainerComponent implements OnInit {
   @Input() key?: string;
 
-  field?: FieldListItem;
+  field?: Field<FieldConfigFormModel>;
 
   constructor(private fieldsService: FieldsService) {}
 
