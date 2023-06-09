@@ -1,67 +1,18 @@
-import { FormControl } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import {
+  FieldValidationFields,
+  FieldValidationLimitCharOption,
+  FieldValidatorRegexType,
+} from './validation.model';
 import { tap } from 'rxjs';
+import { regexPatternValidator } from './validation.fn';
 
-export type FieldValidations = 'required' | 'unique' | 'limitChar' | 'regex';
-
-export type FieldValidationFields = Record<FieldValidations, FormlyFieldConfig>;
-
-export type FieldValidationModel = Record<
-  FieldValidations,
-  FieldValidationModelProps
->;
-
-export interface FieldValidationModelProps {
-  enabled: boolean;
-  value?: FieldValidationLimitChar | FieldValidationPattern;
-}
-
-export enum FieldValidationLimitCharOption {
-  Min = 'Min',
-  Max = 'Max',
-  MinMax = 'MinMax',
-}
-
-export interface FieldValidationLimitChar {
-  option: FieldValidationLimitCharOption;
-  min?: number;
-  max?: number;
-}
-
-export enum FieldValidatorRegexType {
-  Custom,
-  Email,
-  Url,
-}
-
-/* eslint-disable no-useless-escape */
 const FIELD_VALIDATOR_REGEX = {
   email: new RegExp(/^\S+@\S+\.\S+$/),
   url: new RegExp(
     /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\.[a-z]{2,})?(\/[^\s]*)?$/i
   ),
 };
-
-export interface FieldValidationPattern {
-  type: FieldValidatorRegexType;
-  pattern: RegExp;
-  flag: string;
-}
-
-function regexPatternValidator(
-  control: FormControl
-): { [key: string]: unknown } | null {
-  try {
-    // Attempt to create a regex object with the provided pattern
-    new RegExp(control.value);
-  } catch (e) {
-    // If an error occurs, the pattern is invalid
-    return { regexPattern: true };
-  }
-
-  // The pattern is valid
-  return null;
-}
 
 export const validations: FieldValidationFields = {
   required: {
@@ -247,10 +198,6 @@ export const validations: FieldValidationFields = {
                           emitEvent: false,
                         });
                       }
-
-                      // field.formControl?.setValue('bazera', {
-                      //   emitEvent: false,
-                      // });
                     }
                   })
                 );

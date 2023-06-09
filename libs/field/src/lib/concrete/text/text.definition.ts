@@ -1,5 +1,4 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { AbstractFieldDefinition } from '../definition.abstract';
 import {
   getTextFieldAddNewFormFields,
   getTextFieldAddNewModelDefault,
@@ -8,10 +7,11 @@ import {
 } from './text.config';
 import { TextFieldAddNew, TextFieldConfigFormModel } from './text.model';
 import { Field, FieldType } from '../../field.model';
+import { AbstractFieldDefinition } from '../../abstract/definition.abstract';
 import {
   FieldValidationLimitChar,
   FieldValidationPattern,
-} from '../../validation/validations';
+} from '../../validation';
 
 export class TextFieldDefinition extends AbstractFieldDefinition {
   configFormModels = getTextFieldModelDefault();

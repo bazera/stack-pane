@@ -3,9 +3,12 @@ import { Component } from '@angular/core';
 import { StackPane, StackPaneDrawerComponent } from '@jetrepo-dummy/stack-pane';
 import { ChooseFieldDialogComponent } from '../choose-field-dialog/choose-field-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
-import { FieldsService } from '../../fields.service';
 import { ConfigureFieldContainerComponent } from '../configure-field-container/configure-field-container.component';
-import { Field, FieldConfigFormModel } from '../../field/field.model';
+import {
+  Field,
+  FieldConfigFormModel,
+  FieldsService,
+} from '@jetrepo-dummy/field';
 
 @Component({
   selector: 'jetrepo-dummy-manage-fields',

@@ -4,7 +4,7 @@ import {
   FieldConfigFormModel,
   FieldSettingsBase,
 } from '../../field.model';
-import { FieldValidationModelProps } from '../../validation/validations';
+import { FieldValidationModelProps } from '../../validation';
 
 export interface TextFieldSettings extends FieldSettingsBase {
   isTitle: boolean;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Field, FieldConfigFormModel } from './field/field.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Field, FieldConfigFormModel } from './field.model';
 
 @Injectable({
   providedIn: 'root',

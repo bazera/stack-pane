@@ -10,7 +10,7 @@ import {
   FieldValidationLimitCharOption,
   FieldValidatorRegexType,
   validations,
-} from '../../validation/validations';
+} from '../../validation';
 
 export const getTextFieldModelDefault = (): TextFieldConfigFormModel => {
   return {

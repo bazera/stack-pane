@@ -1,4 +1,4 @@
-import { TextFieldDefinition } from './definition/text/text.definition';
+import { TextFieldDefinition } from './concrete';
 import {
   FieldConfigFormModel,
   FieldDefinition,

@@ -1,14 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { StackPaneDrawerComponent } from '@jetrepo-dummy/stack-pane';
-import { ConfigureFieldComponent } from '../../field/components/configure-field/configure-field.component';
-import { FieldsService } from '../../fields.service';
-import { Field, FieldConfigFormModel } from '../../field/field.model';
+import {
+  Field,
+  FieldConfigFormModel,
+  FieldModule,
+  FieldsService,
+} from '@jetrepo-dummy/field';
 
 @Component({
   selector: 'jetrepo-dummy-configure-field-container',
   standalone: true,
-  imports: [CommonModule, StackPaneDrawerComponent, ConfigureFieldComponent],
+  imports: [CommonModule, StackPaneDrawerComponent, FieldModule],
   templateUrl: './configure-field-container.component.html',
   styleUrls: ['./configure-field-container.component.css'],
 })

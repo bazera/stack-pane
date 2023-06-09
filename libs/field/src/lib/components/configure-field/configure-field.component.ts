@@ -12,8 +12,8 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
-import { FieldsService } from '../../../fields.service';
 import { StackPane } from '@jetrepo-dummy/stack-pane';
+import { FieldsService } from '../../fields.service';
 
 @Component({
   selector: 'jetrepo-dummy-configure-field',

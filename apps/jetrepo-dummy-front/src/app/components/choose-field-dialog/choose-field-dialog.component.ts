@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { StackPane, StackPaneDialogComponent } from '@jetrepo-dummy/stack-pane';
-import { FieldType } from '../../field/field.model';
 import { MatButtonModule } from '@angular/material/button';
 import { AddFieldContainerComponent } from '../add-field-container/add-field-container.component';
+import { FieldType } from '@jetrepo-dummy/field';
 
 @Component({
   selector: 'jetrepo-dummy-choose-field-dialog',

@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@jetrepo-dummy/field": ["libs/field/src/index.ts"],
       "@jetrepo-dummy/jet-stack-pane": ["libs/jet-stack-pane/src/index.ts"],
       "@jetrepo-dummy/stack-pane": ["libs/stack-pane/src/index.ts"]
     }
