@@ -1,4 +1,4 @@
-import { TextFieldDefinition } from './concrete';
+import { NumberFieldDefinition, TextFieldDefinition } from './concrete';
 import {
   FieldConfigFormModel,
   FieldDefinition,
@@ -10,6 +10,8 @@ export class FieldFactory {
     switch (type) {
       case FieldType.Text:
         return new TextFieldDefinition();
+      case FieldType.Number:
+        return new NumberFieldDefinition();
       default:
         throw new Error(`Unsupported field type: ${type}`);
     }

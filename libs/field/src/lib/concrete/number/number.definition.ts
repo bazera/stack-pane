@@ -1,30 +1,26 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import {
-  getTextFieldAddNewFormFields,
-  getTextFieldConfigFields,
-} from './text.config';
-import { TextFieldAddNew, TextFieldConfigFormModel } from './text.model';
+  getNumberFieldAddNewFormFields,
+  getNumberFieldConfigFields,
+} from './number.config';
+import { NumberFieldAddNew, NumberFieldConfigFormModel } from './number.model';
 import { Field, FieldType } from '../../field.model';
 import { AbstractFieldDefinition } from '../../abstract/definition.abstract';
 import {
-  FieldValidationLimitChar,
-  FieldValidationPattern,
-} from '../../validation';
-import {
-  getTextFieldAddNewModelDefault,
-  getTextFieldModelDefault,
-} from './text.default';
+  getNumberFieldAddNewModelDefault,
+  getNumberFieldModelDefault,
+} from './number.default';
 
-export class TextFieldDefinition extends AbstractFieldDefinition {
-  type = FieldType.Text;
+export class NumberFieldDefinition extends AbstractFieldDefinition {
+  type = FieldType.Number;
 
-  configFormModels = getTextFieldModelDefault();
-  configFormFields = getTextFieldConfigFields();
+  configFormModels = getNumberFieldModelDefault();
+  configFormFields = getNumberFieldConfigFields();
 
-  addFieldModel = getTextFieldAddNewModelDefault();
-  addFieldFields = getTextFieldAddNewFormFields();
+  addFieldModel = getNumberFieldAddNewModelDefault();
+  addFieldFields = getNumberFieldAddNewFormFields();
 
-  create(): Field<TextFieldConfigFormModel> {
+  create(): Field<NumberFieldConfigFormModel> {
     return {
       name: this.addFieldModel.name,
       key: this.addFieldModel.key,
@@ -46,7 +42,7 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
     };
   }
 
-  update(): Field<TextFieldConfigFormModel> {
+  update(): Field<NumberFieldConfigFormModel> {
     return {
       name: this.configFormModels.settings.name,
       key: this.configFormModels.settings.key,
@@ -60,11 +56,11 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
     };
   }
 
-  generateFieldFromCreateModel(value: TextFieldAddNew): FormlyFieldConfig[] {
+  generateFieldFromCreateModel(value: NumberFieldAddNew): FormlyFieldConfig[] {
     return [
       {
         key: value.key,
-        type: 'input',
+        type: 'number',
         props: {
           label: value.name,
           description: value.helpText,
@@ -74,7 +70,7 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
   }
 
   generateFieldFromConfigModel(
-    value: TextFieldConfigFormModel
+    value: NumberFieldConfigFormModel
   ): FormlyFieldConfig[] {
     const validation = value.validation;
 
@@ -86,17 +82,6 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
           label: value.settings.name,
           description: value.appearance.helpText,
           required: validation.required.enabled,
-          minLength: validation.limitChar.enabled
-            ? (validation.limitChar.value as FieldValidationLimitChar)?.min
-            : undefined,
-          maxLength: validation.limitChar.enabled
-            ? (validation.limitChar.value as FieldValidationLimitChar)?.max
-            : undefined,
-          pattern: validation.regex.enabled
-            ? new RegExp(
-                (validation.regex.value as FieldValidationPattern)?.pattern
-              )
-            : undefined,
         },
       },
     ];

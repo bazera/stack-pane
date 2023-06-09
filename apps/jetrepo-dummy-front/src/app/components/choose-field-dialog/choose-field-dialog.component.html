@@ -1,13 +1,13 @@
 <jet-stack-pane-dialog title="Select Field to Add">
   <section class="field-types">
     <button
-      type="submit"
       class="btn btn-secondary"
       mat-raised-button
       color="secondary"
-      (click)="chooseType(fieldType.Text)"
+      (click)="chooseType(fieldType)"
+      *ngFor="let fieldType of fieldTypes"
     >
-      Text
+      {{ fieldType }}
     </button>
   </section>
 </jet-stack-pane-dialog>

@@ -79,7 +79,7 @@ export class AddFieldComponent implements OnInit {
 
   ngOnInit() {
     if (this.type) {
-      this._field = this.fieldFactory.createField(FieldType.Text);
+      this._field = this.fieldFactory.createField(this.type);
       this._field.init();
     }
   }

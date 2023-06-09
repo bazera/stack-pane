@@ -13,7 +13,7 @@ import { FieldType } from '@jetrepo-dummy/field';
   styleUrls: ['./choose-field-dialog.component.scss'],
 })
 export class ChooseFieldDialogComponent {
-  fieldType = FieldType;
+  fieldTypes = Object.values(FieldType);
 
   constructor(private stackPane: StackPane) {}
 

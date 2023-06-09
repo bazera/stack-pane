@@ -11,7 +11,7 @@ export enum FieldType {
 export enum FieldAppearance {
   TextInput = 'input',
   Textarea = 'textarea',
-  NumberInput = 'NumberInput',
+  NumberInput = 'number',
 }
 
 export interface FieldConfigFormFields {
