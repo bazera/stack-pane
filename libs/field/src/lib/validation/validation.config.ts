@@ -135,10 +135,7 @@ export const validations: FieldValidationFields = {
         className: 'inner-form',
         resetOnHide: false,
         expressions: {
-          hide: (field) => {
-            console.log(field.parent?.model);
-            return !field.parent?.model.enabled;
-          },
+          hide: (field) => !field.parent?.model.enabled,
         },
         fieldGroup: [
           {
