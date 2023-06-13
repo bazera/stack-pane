@@ -7,7 +7,7 @@ import {
   FieldDefinition,
   FieldType,
 } from '../field.model';
-import { Observable, filter, map, startWith } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 export abstract class AbstractFieldDefinition
@@ -59,7 +59,6 @@ export abstract class AbstractFieldDefinition
     if (this.configForm) {
       this.preview$ = this.configForm.valueChanges.pipe(
         startWith(this.configFormModels),
-        filter(() => !this.configForm?.invalid),
         map(() => this.generateFieldFromConfigModel(this.configFormModels))
       );
       return;
@@ -68,7 +67,6 @@ export abstract class AbstractFieldDefinition
     if (this.addFieldForm) {
       this.preview$ = this.addFieldForm.valueChanges.pipe(
         startWith(this.addFieldModel),
-        filter(() => !this.addFieldForm?.invalid),
         map((value) => this.generateFieldFromCreateModel(value))
       );
     }

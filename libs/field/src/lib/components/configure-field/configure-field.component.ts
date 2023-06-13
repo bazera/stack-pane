@@ -69,7 +69,5 @@ export class ConfigureFieldComponent implements OnInit {
       this.fieldDefinition = this.fieldFactory.createField(this.field.type);
       this.fieldDefinition.init(this.field.configModel);
     }
-
-    console.log(this.fieldDefinition);
   }
 }

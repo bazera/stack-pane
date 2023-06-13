@@ -65,11 +65,13 @@ export const validations: FieldValidationFields = {
       {
         key: 'value',
         className: 'inner-form',
+        resetOnHide: false,
         hideExpression: '!field.parent.model.enabled',
         fieldGroup: [
           {
             key: 'option',
             type: 'select',
+            resetOnHide: false,
             props: {
               options: [
                 {
@@ -90,6 +92,7 @@ export const validations: FieldValidationFields = {
           {
             key: 'min',
             type: 'number',
+            resetOnHide: false,
             props: {
               label: 'Minimum:',
             },
@@ -101,6 +104,7 @@ export const validations: FieldValidationFields = {
           {
             key: 'max',
             type: 'number',
+            resetOnHide: false,
             props: {
               label: 'Maximum:',
             },
@@ -129,10 +133,17 @@ export const validations: FieldValidationFields = {
       {
         key: 'value',
         className: 'inner-form',
-        hideExpression: '!field.parent.model.enabled',
+        resetOnHide: false,
+        expressions: {
+          hide: (field) => {
+            console.log(field.parent?.model);
+            return !field.parent?.model.enabled;
+          },
+        },
         fieldGroup: [
           {
             key: 'type',
+            resetOnHide: false,
             type: 'select',
             props: {
               options: [
@@ -179,6 +190,7 @@ export const validations: FieldValidationFields = {
           },
           {
             key: 'pattern',
+            resetOnHide: false,
             type: 'input',
             props: {
               label: 'Pattern:',
@@ -209,6 +221,7 @@ export const validations: FieldValidationFields = {
           },
           {
             key: 'flags',
+            resetOnHide: false,
             type: 'input',
             props: {
               label: 'Flags:',
