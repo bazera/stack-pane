@@ -25,18 +25,22 @@ export const appConfig: ApplicationConfig = {
         componentRegistry: [
           {
             component: AddFieldContainerComponent,
+            outlet: 'add-field',
             type: StackPaneType.Drawer,
           },
           {
             component: ConfigureFieldContainerComponent,
+            outlet: 'configure-field',
             type: StackPaneType.Drawer,
           },
           {
             component: ChooseFieldDialogComponent,
+            outlet: 'choose-field-dialog',
             type: StackPaneType.Dialog,
           },
           {
             component: ManageFieldsComponent,
+            outlet: 'manage-fields',
             type: StackPaneType.Drawer,
           },
         ],

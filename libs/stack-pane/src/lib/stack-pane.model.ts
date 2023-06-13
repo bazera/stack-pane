@@ -8,6 +8,7 @@ export enum StackPaneType {
 export interface StackPaneConfig {
   componentRegistry?: {
     component: Type<unknown>;
+    outlet: string;
     type: StackPaneType;
   }[];
 }

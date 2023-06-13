@@ -10,7 +10,6 @@ import {
   NavigationStart,
   Router,
 } from '@angular/router';
-import { getComponentNameKebab } from './utils.fn';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
@@ -110,10 +109,14 @@ export class StackPaneService {
       );
     }
 
-    const componentNameKebeb = getComponentNameKebab(component.name);
-    this.router.navigate(
-      [{ outlets: { [componentNameKebeb]: componentNameKebeb } }],
-      extras
-    );
+    const outlet = this.config.componentRegistry.find(
+      (x) => x.component === component
+    )?.outlet;
+
+    if (!outlet) {
+      throw new Error(`${component.name} doesn't have an outlet specified`);
+    }
+
+    this.router.navigate([{ outlets: { [outlet]: outlet } }], extras);
   }
 }

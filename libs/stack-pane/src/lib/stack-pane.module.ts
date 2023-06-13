@@ -40,7 +40,7 @@ export class StackPaneModule {
 
               router.resetConfig([
                 ...config.componentRegistry.map((c) =>
-                  stackPaneRouteFactory(c.component)
+                  stackPaneRouteFactory(c.component, c.outlet)
                 ),
                 ...router.config,
               ]);

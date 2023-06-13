@@ -1,9 +1,5 @@
 import { Type, inject } from '@angular/core';
 import { StackPaneService } from './stack-pane.service';
-import {
-  convertOutletToComponentName,
-  getComponentNameKebab,
-} from './utils.fn';
 import { Route } from '@angular/router';
 import { StackPaneComponent } from './components';
 import { tap } from 'rxjs';
@@ -26,7 +22,7 @@ const getStackPaneGurads = (outlet: string) => {
       () => {
         const service = inject(StackPaneService);
         const layer = service.config?.componentRegistry?.find(
-          (x) => x.component.name === convertOutletToComponentName(outlet)
+          (x) => x.outlet === outlet
         );
 
         if (layer) {
@@ -37,14 +33,16 @@ const getStackPaneGurads = (outlet: string) => {
   };
 };
 
-export function stackPaneRouteFactory(component: Type<unknown>): Route {
-  const componentNameKebeb = getComponentNameKebab(component.name);
-  const { canActivate, canDeactivate } = getStackPaneGurads(componentNameKebeb);
+export function stackPaneRouteFactory(
+  component: Type<unknown>,
+  outlet: string
+): Route {
+  const { canActivate, canDeactivate } = getStackPaneGurads(outlet);
 
   return {
-    path: componentNameKebeb,
+    path: outlet,
     component: StackPaneComponent,
-    outlet: componentNameKebeb,
+    outlet: outlet,
     canActivate,
     canDeactivate,
     children: [
