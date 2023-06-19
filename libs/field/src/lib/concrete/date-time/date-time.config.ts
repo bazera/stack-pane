@@ -8,11 +8,11 @@ import {
 } from '../../field.model';
 import { validations } from '../../validation';
 import {
-  BooleanFieldAddNew,
-  BooleanFieldConfigFormModel,
-} from './boolean.model';
+  DateTimeFieldAddNew,
+  DateTimeFieldConfigFormModel,
+} from './date-time.model';
 
-export class BooleanFieldConfig implements FieldConfig {
+export class DateTimeFieldConfig implements FieldConfig {
   getConfigFormFields(): FieldConfigFormFields {
     return {
       settings: [
@@ -37,19 +37,9 @@ export class BooleanFieldConfig implements FieldConfig {
       values: [
         {
           key: 'default',
-          type: 'radio',
+          type: 'datepicker',
           props: {
             label: 'Default Value',
-            options: [
-              {
-                value: true,
-                label: 'Yes',
-              },
-              {
-                value: false,
-                label: 'No',
-              },
-            ],
           },
         },
       ],
@@ -60,7 +50,7 @@ export class BooleanFieldConfig implements FieldConfig {
           type: 'radio',
           props: {
             label: 'Display Field As',
-            options: POSSIBLE_APPEARANCES[FieldType.Boolean].map(
+            options: POSSIBLE_APPEARANCES[FieldType.DateTime].map(
               (value: FieldAppearance) => ({
                 label: value,
                 value,
@@ -75,22 +65,6 @@ export class BooleanFieldConfig implements FieldConfig {
             label: 'Help Text',
             placeholder: '',
             description: 'Additional information about this field for editors.',
-          },
-        },
-        {
-          key: 'trueLabel',
-          type: 'input',
-          props: {
-            label: 'True condition custom label',
-            required: true,
-          },
-        },
-        {
-          key: 'falseLabel',
-          type: 'input',
-          props: {
-            label: 'False condition custom label',
-            required: true,
           },
         },
       ],
@@ -129,20 +103,18 @@ export class BooleanFieldConfig implements FieldConfig {
     ];
   }
 
-  getConfigModelDefault(): BooleanFieldConfigFormModel {
+  getConfigModelDefault(): DateTimeFieldConfigFormModel {
     return {
       settings: {
         key: '',
         name: '',
       },
       values: {
-        default: true,
+        default: '',
       },
       appearance: {
-        displayAs: POSSIBLE_APPEARANCES[FieldType.Boolean][0],
+        displayAs: POSSIBLE_APPEARANCES[FieldType.DateTime][0],
         helpText: '',
-        trueLabel: 'True',
-        falseLabel: 'False',
       },
       validation: {
         required: {
@@ -152,7 +124,7 @@ export class BooleanFieldConfig implements FieldConfig {
     };
   }
 
-  getAddNewModelDefault(): BooleanFieldAddNew {
+  getAddNewModelDefault(): DateTimeFieldAddNew {
     return {
       name: '',
       key: '',

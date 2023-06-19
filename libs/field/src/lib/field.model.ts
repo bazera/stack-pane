@@ -7,6 +7,7 @@ export enum FieldType {
   Text = 'Text',
   Number = 'Number',
   Boolean = 'Boolean',
+  DateTime = 'DateTime',
 }
 
 export enum FieldAppearance {
@@ -14,6 +15,7 @@ export enum FieldAppearance {
   Textarea = 'textarea',
   NumberInput = 'number',
   BooleanRadio = 'radio',
+  Datepicker = 'datepicker',
 }
 
 export interface FieldConfig {

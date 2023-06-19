@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   Field,
-  FieldConfigFormFields,
   FieldConfigFormModel,
   FieldDefinition,
   FieldTab,
@@ -10,10 +9,13 @@ import {
 import { FieldFactory } from '../../field.factory';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { StackPane } from '@jetrepo-dummy/stack-pane';
 import { FieldsService } from '../../fields.service';
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'jetrepo-dummy-configure-field',
@@ -24,6 +26,9 @@ import { FieldsService } from '../../fields.service';
     FormlyMaterialModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatDatepickerModule,
+    FormlyMatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './configure-field.component.html',
   styleUrls: ['./configure-field.component.scss'],

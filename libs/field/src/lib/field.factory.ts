@@ -7,6 +7,10 @@ import {
   BooleanFieldDefinition,
 } from './concrete';
 import {
+  DateTimeFieldConfig,
+  DateTimeFieldDefinition,
+} from './concrete/date-time';
+import {
   FieldConfigFormModel,
   FieldDefinition,
   FieldType,
@@ -25,6 +29,10 @@ export class FieldFactory {
       case FieldType.Boolean: {
         const config = new BooleanFieldConfig();
         return new BooleanFieldDefinition(config);
+      }
+      case FieldType.DateTime: {
+        const config = new DateTimeFieldConfig();
+        return new DateTimeFieldDefinition(config);
       }
       default:
         throw new Error(`Unsupported field type: ${type}`);

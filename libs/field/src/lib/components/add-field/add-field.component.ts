@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  FieldAddNewBase,
   FieldConfigFormModel,
   FieldDefinition,
   FieldType,
@@ -13,6 +12,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { StackPane } from '@jetrepo-dummy/stack-pane';
 import { FieldsService } from '../../fields.service';
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 
 @Component({
   selector: 'jetrepo-dummy-add-field',
@@ -23,6 +23,7 @@ import { FieldsService } from '../../fields.service';
     FormlyMaterialModule,
     ReactiveFormsModule,
     MatButtonModule,
+    FormlyMatDatepickerModule,
   ],
   templateUrl: './add-field.component.html',
   styleUrls: ['./add-field.component.scss'],
