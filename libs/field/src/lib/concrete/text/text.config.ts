@@ -2,14 +2,83 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { POSSIBLE_APPEARANCES } from '../../field.constant';
 import {
   FieldAppearance,
+  FieldConfig,
   FieldConfigFormFields,
   FieldType,
 } from '../../field.model';
-import { validations } from '../../validation';
+import {
+  FieldValidationLimitCharOption,
+  FieldValidatorRegexType,
+  validations,
+} from '../../validation';
+import { TextFieldConfigFormModel, TextFieldAddNew } from './text.model';
 
-export const getTextFieldConfigFields = (): FieldConfigFormFields => {
-  return {
-    settings: [
+export class TextFieldConfig implements FieldConfig {
+  getConfigFormFields(): FieldConfigFormFields {
+    return {
+      settings: [
+        {
+          key: 'name',
+          type: 'input',
+          props: {
+            label: 'Name',
+            required: true,
+          },
+        },
+        {
+          key: 'key',
+          type: 'input',
+          props: {
+            label: 'Key',
+            required: true,
+            disabled: true,
+          },
+        },
+      ],
+      values: [
+        {
+          key: 'default',
+          type: 'input',
+          props: {
+            label: 'Default Value',
+          },
+        },
+      ],
+      validation: [
+        validations.required,
+        validations.unique,
+        validations.limitChar,
+        validations.regex,
+      ],
+      appearance: [
+        {
+          key: 'displayAs',
+          type: 'radio',
+          props: {
+            label: 'Display Field As',
+            options: POSSIBLE_APPEARANCES[FieldType.Text].map(
+              (value: FieldAppearance) => ({
+                label: value,
+                value,
+              })
+            ),
+          },
+        },
+        {
+          key: 'helpText',
+          type: 'textarea',
+          props: {
+            label: 'Help Text',
+            placeholder: '',
+            description: 'Additional information about this field for editors.',
+          },
+        },
+      ],
+    };
+  }
+
+  getAddNewFormFields(): FormlyFieldConfig[] {
+    return [
       {
         key: 'name',
         type: 'input',
@@ -24,37 +93,8 @@ export const getTextFieldConfigFields = (): FieldConfigFormFields => {
         props: {
           label: 'Key',
           required: true,
-          disabled: true,
-        },
-      },
-    ],
-    values: [
-      {
-        key: 'default',
-        type: 'input',
-        props: {
-          label: 'Default Value',
-        },
-      },
-    ],
-    validation: [
-      validations.required,
-      validations.unique,
-      validations.limitChar,
-      validations.regex,
-    ],
-    appearance: [
-      {
-        key: 'displayAs',
-        type: 'radio',
-        props: {
-          label: 'Display Field As',
-          options: POSSIBLE_APPEARANCES[FieldType.Text].map(
-            (value: FieldAppearance) => ({
-              label: value,
-              value,
-            })
-          ),
+          placeholder: 'Enter Name and Key will be generated automatically',
+          description: 'This is a human-readable identifier used in API.',
         },
       },
       {
@@ -66,55 +106,79 @@ export const getTextFieldConfigFields = (): FieldConfigFormFields => {
           description: 'Additional information about this field for editors.',
         },
       },
-    ],
-  };
-};
+      {
+        key: 'displayHelpText',
+        type: 'radio',
+        props: {
+          label: 'Display Help Text',
+          options: [
+            {
+              value: 'belowLabel',
+              label: 'Below the field name label',
+            },
+            {
+              value: 'tooltip',
+              label: 'In a tooltip of the "help" icon',
+            },
+          ],
+        },
+      },
+    ];
+  }
 
-export const getTextFieldAddNewFormFields = (): FormlyFieldConfig[] => {
-  return [
-    {
-      key: 'name',
-      type: 'input',
-      props: {
-        label: 'Name',
-        required: true,
+  getConfigModelDefault(): TextFieldConfigFormModel {
+    return {
+      settings: {
+        key: '',
+        name: '',
+        isTitle: false,
+        translatable: false,
       },
-    },
-    {
-      key: 'key',
-      type: 'input',
-      props: {
-        label: 'Key',
-        required: true,
-        placeholder: 'Enter Name and Key will be generated automatically',
-        description: 'This is a human-readable identifier used in API.',
+      values: {
+        default: '',
       },
-    },
-    {
-      key: 'helpText',
-      type: 'textarea',
-      props: {
-        label: 'Help Text',
+      appearance: {
+        displayAs: POSSIBLE_APPEARANCES[FieldType.Text][0],
+        helpText: '',
         placeholder: '',
-        description: 'Additional information about this field for editors.',
+        displayCharCount: false,
+        displayHelpText: 'belowLabel',
       },
-    },
-    {
-      key: 'displayHelpText',
-      type: 'radio',
-      props: {
-        label: 'Display Help Text',
-        options: [
-          {
-            value: 'belowLabel',
-            label: 'Below the field name label',
+      validation: {
+        required: {
+          enabled: false,
+        },
+        unique: {
+          enabled: false,
+        },
+        limitChar: {
+          enabled: false,
+          value: {
+            min: undefined,
+            max: undefined,
+            option: FieldValidationLimitCharOption.MinMax,
           },
-          {
-            value: 'tooltip',
-            label: 'In a tooltip of the "help" icon',
+        },
+        regex: {
+          enabled: false,
+          value: {
+            type: FieldValidatorRegexType.Custom,
+            pattern: new RegExp(''),
+            flag: '',
           },
-        ],
+        },
       },
-    },
-  ];
-};
+    };
+  }
+
+  getAddNewModelDefault(): TextFieldAddNew {
+    return {
+      name: '',
+      key: '',
+      displayHelpText: 'belowLabel',
+      helpText: '',
+      isTitle: false,
+      translatable: false,
+    };
+  }
+}

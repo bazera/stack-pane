@@ -1,27 +1,32 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { NumberFieldAddNew, NumberFieldConfigFormModel } from './number.model';
 import { Field, FieldType } from '../../field.model';
 import { AbstractFieldDefinition } from '../../abstract/definition.abstract';
-import { NumberFieldConfig } from './number.config';
+import { BooleanFieldConfig } from './boolean.config';
+import {
+  BooleanFieldAddNew,
+  BooleanFieldConfigFormModel,
+} from './boolean.model';
 
-export class NumberFieldDefinition extends AbstractFieldDefinition {
-  type = FieldType.Number;
+export class BooleanFieldDefinition extends AbstractFieldDefinition {
+  type = FieldType.Boolean;
 
   configFormFields = this.config.getConfigFormFields();
   configFormModels = this.config.getConfigModelDefault();
   addFieldFields = this.config.getAddNewFormFields();
   addFieldModel = this.config.getAddNewModelDefault();
 
-  constructor(private config: NumberFieldConfig) {
+  constructor(private config: BooleanFieldConfig) {
     super();
   }
 
-  create(): Field<NumberFieldConfigFormModel> {
+  create(): Field<BooleanFieldConfigFormModel> {
     return {
       name: this.addFieldModel.name,
       key: this.addFieldModel.key,
       type: this.type,
-      model: {},
+      model: {
+        [this.addFieldModel.key]: this.configFormModels.values.default,
+      },
       configModel: {
         ...this.configFormModels,
         settings: {
@@ -38,7 +43,7 @@ export class NumberFieldDefinition extends AbstractFieldDefinition {
     };
   }
 
-  update(): Field<NumberFieldConfigFormModel> {
+  update(): Field<BooleanFieldConfigFormModel> {
     return {
       name: this.configFormModels.settings.name,
       key: this.configFormModels.settings.key,
@@ -52,13 +57,23 @@ export class NumberFieldDefinition extends AbstractFieldDefinition {
     };
   }
 
-  generateFieldFromCreateModel(value: NumberFieldAddNew): FormlyFieldConfig[] {
+  generateFieldFromCreateModel(value: BooleanFieldAddNew): FormlyFieldConfig[] {
     return [
       {
         key: value.key,
-        type: 'number',
+        type: 'radio',
         props: {
           label: value.name,
+          options: [
+            {
+              value: true,
+              label: 'Yes',
+            },
+            {
+              value: false,
+              label: 'No',
+            },
+          ],
           description: value.helpText,
         },
       },
@@ -66,7 +81,7 @@ export class NumberFieldDefinition extends AbstractFieldDefinition {
   }
 
   generateFieldFromConfigModel(
-    value: NumberFieldConfigFormModel
+    value: BooleanFieldConfigFormModel
   ): FormlyFieldConfig[] {
     const validation = value.validation;
 
@@ -77,6 +92,16 @@ export class NumberFieldDefinition extends AbstractFieldDefinition {
         props: {
           label: value.settings.name,
           description: value.appearance.helpText,
+          options: [
+            {
+              value: true,
+              label: value.appearance.trueLabel,
+            },
+            {
+              value: false,
+              label: value.appearance.falseLabel,
+            },
+          ],
           required: validation.required.enabled,
         },
       },

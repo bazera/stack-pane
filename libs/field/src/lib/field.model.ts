@@ -6,12 +6,21 @@ import { FieldValidationModel } from './validation';
 export enum FieldType {
   Text = 'Text',
   Number = 'Number',
+  Boolean = 'Boolean',
 }
 
 export enum FieldAppearance {
   TextInput = 'input',
   Textarea = 'textarea',
   NumberInput = 'number',
+  BooleanRadio = 'radio',
+}
+
+export interface FieldConfig {
+  getConfigFormFields(): FieldConfigFormFields;
+  getAddNewFormFields(): FormlyFieldConfig[];
+  getConfigModelDefault(): FieldConfigFormModel;
+  getAddNewModelDefault(): FieldAddNewBase;
 }
 
 export interface FieldConfigFormFields {
