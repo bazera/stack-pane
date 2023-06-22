@@ -5,6 +5,7 @@ export const POSSIBLE_APPEARANCES = {
   [FieldType.Number]: [FieldAppearance.NumberInput],
   [FieldType.Boolean]: [FieldAppearance.BooleanRadio],
   [FieldType.DateTime]: [FieldAppearance.Datepicker],
+  [FieldType.SelectList]: [FieldAppearance.SelectList],
 };
 
 export const APPEARANCES_LABEL = {
@@ -12,4 +13,5 @@ export const APPEARANCES_LABEL = {
   [FieldAppearance.Textarea]: 'Text Area',
   [FieldAppearance.BooleanRadio]: 'Radio',
   [FieldAppearance.Datepicker]: 'Datepicker',
+  [FieldAppearance.SelectList]: 'Select List',
 };

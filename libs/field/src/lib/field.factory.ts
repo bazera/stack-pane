@@ -5,11 +5,11 @@ import {
   TextFieldDefinition,
   BooleanFieldConfig,
   BooleanFieldDefinition,
-} from './concrete';
-import {
+  SelectListFieldConfig,
+  SelectListFieldDefinition,
   DateTimeFieldConfig,
   DateTimeFieldDefinition,
-} from './concrete/date-time';
+} from './concrete';
 import {
   FieldConfigFormModel,
   FieldDefinition,
@@ -33,6 +33,10 @@ export class FieldFactory {
       case FieldType.DateTime: {
         const config = new DateTimeFieldConfig();
         return new DateTimeFieldDefinition(config);
+      }
+      case FieldType.SelectList: {
+        const config = new SelectListFieldConfig();
+        return new SelectListFieldDefinition(config);
       }
       default:
         throw new Error(`Unsupported field type: ${type}`);
