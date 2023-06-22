@@ -5,6 +5,7 @@ import { FieldValidationModel } from './validation';
 
 export enum FieldType {
   Text = 'Text',
+  RichText = 'RichText',
   Number = 'Number',
   Boolean = 'Boolean',
   DateTime = 'DateTime',
@@ -13,6 +14,7 @@ export enum FieldType {
 
 export enum FieldAppearance {
   TextInput = 'input',
+  RichText = 'input',
   Textarea = 'textarea',
   NumberInput = 'number',
   BooleanRadio = 'radio',

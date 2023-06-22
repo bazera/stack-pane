@@ -6,6 +6,7 @@ export const POSSIBLE_APPEARANCES = {
   [FieldType.Boolean]: [FieldAppearance.BooleanRadio],
   [FieldType.DateTime]: [FieldAppearance.Datepicker],
   [FieldType.SelectList]: [FieldAppearance.SelectList],
+  [FieldType.RichText]: [FieldAppearance.RichText],
 };
 
 export const APPEARANCES_LABEL = {

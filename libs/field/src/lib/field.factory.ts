@@ -9,6 +9,8 @@ import {
   SelectListFieldDefinition,
   DateTimeFieldConfig,
   DateTimeFieldDefinition,
+  RichTextFieldConfig,
+  RichTextFieldDefinition,
 } from './concrete';
 import {
   FieldConfigFormModel,
@@ -37,6 +39,10 @@ export class FieldFactory {
       case FieldType.SelectList: {
         const config = new SelectListFieldConfig();
         return new SelectListFieldDefinition(config);
+      }
+      case FieldType.RichText: {
+        const config = new RichTextFieldConfig();
+        return new RichTextFieldDefinition(config);
       }
       default:
         throw new Error(`Unsupported field type: ${type}`);
