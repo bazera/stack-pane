@@ -31,7 +31,6 @@ export class NumberFieldDefinition extends AbstractFieldDefinition {
         },
         appearance: {
           ...this.configFormModels.appearance,
-          helpText: this.addFieldModel.helpText,
         },
       },
       fieldConfig: this.generateFieldFromCreateModel(this.addFieldModel),
@@ -59,7 +58,6 @@ export class NumberFieldDefinition extends AbstractFieldDefinition {
         type: 'number',
         props: {
           label: value.name,
-          description: value.helpText,
         },
       },
     ];
@@ -73,7 +71,7 @@ export class NumberFieldDefinition extends AbstractFieldDefinition {
     return [
       {
         key: value.settings.key,
-        type: value.appearance.displayAs,
+        type: 'number',
         props: {
           label: value.settings.name,
           description: value.appearance.helpText,

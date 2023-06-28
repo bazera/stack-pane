@@ -1,54 +1,63 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { POSSIBLE_APPEARANCES } from '../../field.constant';
 import {
-  FieldAppearance,
+  DisplayHelpText,
   FieldConfig,
   FieldConfigFormFields,
-  FieldType,
 } from '../../field.model';
 import {
   NumberFieldAddNew,
   NumberFieldConfigFormModel,
-  NumberFieldType,
+  NumberFieldFormat,
 } from './number.model';
-import { validations } from '../../validation';
+import {
+  BASE_APPEARANCE,
+  BASE_APPEARANCE_DEFAULT,
+  BASE_SETTINGS,
+  BASE_SETTINGS_CREATE,
+  BASE_SETTINGS_CREATE_DEFAULT,
+  BASE_SETTINGS_DEFAULT,
+  BASE_VALIDATION,
+} from '../../field.config';
 
 export class NumberFieldConfig implements FieldConfig {
   getConfigFormFields(): FieldConfigFormFields {
     return {
       settings: [
-        {
-          key: 'name',
-          type: 'input',
-          props: {
-            label: 'Name',
-            required: true,
-          },
-        },
-        {
-          key: 'key',
-          type: 'input',
-          props: {
-            label: 'Key',
-            required: true,
-            disabled: true,
-          },
-        },
+        ...BASE_SETTINGS,
         {
           key: 'type',
           type: 'radio',
           props: {
-            label: 'Type',
+            label: 'Number Format',
             options: [
               {
                 label: 'Integer',
-                value: NumberFieldType.Integer,
+                value: NumberFieldFormat.Integer,
               },
               {
                 label: 'Decimal',
-                value: NumberFieldType.Decimal,
+                value: NumberFieldFormat.Decimal,
+              },
+              {
+                label: 'Float',
+                value: NumberFieldFormat.Float,
               },
             ],
+          },
+        },
+        {
+          key: 'precision',
+          type: 'number',
+          props: {
+            label:
+              'The total number of digits to store in this field, from both sides of the decimal point.',
+          },
+        },
+        {
+          key: 'scale',
+          type: 'number',
+          props: {
+            label: 'The number of digits to the right of the decimal point.',
           },
         },
       ],
@@ -61,28 +70,28 @@ export class NumberFieldConfig implements FieldConfig {
           },
         },
       ],
-      validation: [validations.required],
+      validation: [...BASE_VALIDATION],
       appearance: [
+        ...BASE_APPEARANCE,
         {
-          key: 'displayAs',
-          type: 'radio',
+          key: 'placeholder',
+          type: 'input',
           props: {
-            label: 'Display Field As',
-            options: POSSIBLE_APPEARANCES[FieldType.Number].map(
-              (value: FieldAppearance) => ({
-                label: value,
-                value,
-              })
-            ),
+            label: 'Placeholder Text',
           },
         },
         {
-          key: 'helpText',
-          type: 'textarea',
+          key: 'prefix',
+          type: 'input',
           props: {
-            label: 'Help Text',
-            placeholder: '',
-            description: 'Additional information about this field for editors.',
+            label: 'Prefix',
+          },
+        },
+        {
+          key: 'suffix',
+          type: 'input',
+          props: {
+            label: 'Suffix',
           },
         },
       ],
@@ -90,69 +99,25 @@ export class NumberFieldConfig implements FieldConfig {
   }
 
   getAddNewFormFields(): FormlyFieldConfig[] {
-    return [
-      {
-        key: 'name',
-        type: 'input',
-        props: {
-          label: 'Name',
-          required: true,
-        },
-      },
-      {
-        key: 'key',
-        type: 'input',
-        props: {
-          label: 'Key',
-          required: true,
-          placeholder: 'Enter Name and Key will be generated automatically',
-          description: 'This is a human-readable identifier used in API.',
-        },
-      },
-      {
-        key: 'helpText',
-        type: 'textarea',
-        props: {
-          label: 'Help Text',
-          placeholder: '',
-          description: 'Additional information about this field for editors.',
-        },
-      },
-      {
-        key: 'displayHelpText',
-        type: 'radio',
-        props: {
-          label: 'Display Help Text',
-          options: [
-            {
-              value: 'belowLabel',
-              label: 'Below the field name label',
-            },
-            {
-              value: 'tooltip',
-              label: 'In a tooltip of the "help" icon',
-            },
-          ],
-        },
-      },
-    ];
+    return [...BASE_SETTINGS_CREATE];
   }
 
   getConfigModelDefault(): NumberFieldConfigFormModel {
     return {
       settings: {
-        key: '',
-        name: '',
-        type: NumberFieldType.Integer,
+        ...BASE_SETTINGS_DEFAULT,
+        format: NumberFieldFormat.Integer,
+        precision: 0,
+        scale: 0,
       },
       values: {
         default: 0,
       },
       appearance: {
-        displayAs: POSSIBLE_APPEARANCES[FieldType.Number][0],
-        helpText: '',
+        ...BASE_APPEARANCE_DEFAULT,
         placeholder: '',
-        displayHelpText: 'belowLabel',
+        prefix: '',
+        suffix: '',
       },
       validation: {
         required: {
@@ -164,10 +129,8 @@ export class NumberFieldConfig implements FieldConfig {
 
   getAddNewModelDefault(): NumberFieldAddNew {
     return {
-      name: '',
-      key: '',
-      helpText: '',
-      displayHelpText: 'belowLabel',
+      ...BASE_SETTINGS_CREATE_DEFAULT,
+      format: NumberFieldFormat.Integer,
     };
   }
 }

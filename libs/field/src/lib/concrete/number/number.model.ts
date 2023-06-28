@@ -7,12 +7,15 @@ import {
 import { FieldValidationModelProps } from '../../validation';
 
 export interface NumberFieldSettings extends FieldSettingsBase {
-  type: NumberFieldType;
+  format: NumberFieldFormat;
+  precision?: number;
+  scale?: number;
 }
 
-export enum NumberFieldType {
-  Integer,
-  Decimal,
+export enum NumberFieldFormat {
+  Integer = 'Integer',
+  Decimal = 'Decimal',
+  Float = 'Float',
 }
 
 export interface NumberFieldValues extends Record<string, unknown> {
@@ -20,8 +23,8 @@ export interface NumberFieldValues extends Record<string, unknown> {
 }
 
 export interface NumberFieldAppearance extends FieldAppearanceBase {
-  helpText: string;
-  displayHelpText: 'belowLabel' | 'tooltip';
+  prefix: string;
+  suffix: string;
   placeholder: string;
 }
 
@@ -33,6 +36,5 @@ export interface NumberFieldConfigFormModel extends FieldConfigFormModel {
 }
 
 export interface NumberFieldAddNew extends FieldAddNewBase {
-  helpText: string;
-  displayHelpText: 'belowLabel' | 'tooltip';
+  format: NumberFieldFormat;
 }

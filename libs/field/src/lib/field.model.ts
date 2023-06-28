@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { FieldValidationModel } from './validation';
 
 export enum FieldType {
-  Text = 'Text',
-  RichText = 'RichText',
+  ShortText = 'ShortText',
+  LongText = 'LongText',
   Number = 'Number',
   Boolean = 'Boolean',
   DateTime = 'DateTime',
   SelectList = 'SelectList',
+  RichText = 'RichText',
 }
 
 export enum FieldAppearance {
@@ -20,6 +21,11 @@ export enum FieldAppearance {
   BooleanRadio = 'radio',
   Datepicker = 'datepicker',
   SelectList = 'select',
+}
+
+export enum DisplayHelpText {
+  BelowLabel = 'BelowLabel',
+  Tooltip = 'Tooltip',
 }
 
 export interface FieldConfig {
@@ -38,10 +44,23 @@ export interface FieldConfigFormFields {
 export interface FieldSettingsBase {
   name: string;
   key: string;
+  translatable: boolean;
+  hiddenFromApi: boolean;
+  hasMultipleValues: boolean;
 }
 
 export interface FieldAppearanceBase {
-  displayAs: FieldAppearance;
+  helpText: string;
+  displayHelpText: DisplayHelpText;
+  hiddenInAdmin: boolean;
+}
+
+export interface FieldAddNewBase {
+  name: string;
+  key: string;
+  translatable: boolean;
+  hiddenFromApi: boolean;
+  hasMultipleValues: boolean;
 }
 
 export interface Field<T extends FieldConfigFormModel> {
@@ -71,11 +90,6 @@ export interface FieldConfigFormModel {
   values: Record<string, unknown>;
   validation: Partial<FieldValidationModel>;
   appearance: FieldAppearanceBase;
-}
-
-export interface FieldAddNewBase {
-  name: string;
-  key: string;
 }
 
 export enum FieldTab {

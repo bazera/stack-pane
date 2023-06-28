@@ -1,26 +1,29 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { TextFieldAddNew, TextFieldConfigFormModel } from './text.model';
+import {
+  ShortTextFieldAddNew,
+  ShortTextFieldConfigFormModel,
+} from './short-text.model';
 import { Field, FieldType } from '../../field.model';
 import { AbstractFieldDefinition } from '../../abstract/definition.abstract';
 import {
   FieldValidationLimitChar,
   FieldValidationPattern,
 } from '../../validation';
-import { TextFieldConfig } from './text.config';
+import { ShortTextFieldConfig } from './short-text.config';
 
-export class TextFieldDefinition extends AbstractFieldDefinition {
-  type = FieldType.Text;
+export class ShortTextFieldDefinition extends AbstractFieldDefinition {
+  type = FieldType.ShortText;
 
   configFormFields = this.config.getConfigFormFields();
   configFormModels = this.config.getConfigModelDefault();
   addFieldFields = this.config.getAddNewFormFields();
   addFieldModel = this.config.getAddNewModelDefault();
 
-  constructor(private config: TextFieldConfig) {
+  constructor(private config: ShortTextFieldConfig) {
     super();
   }
 
-  create(): Field<TextFieldConfigFormModel> {
+  create(): Field<ShortTextFieldConfigFormModel> {
     return {
       name: this.addFieldModel.name,
       key: this.addFieldModel.key,
@@ -35,14 +38,13 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
         },
         appearance: {
           ...this.configFormModels.appearance,
-          helpText: this.addFieldModel.helpText,
         },
       },
       fieldConfig: this.generateFieldFromCreateModel(this.addFieldModel),
     };
   }
 
-  update(): Field<TextFieldConfigFormModel> {
+  update(): Field<ShortTextFieldConfigFormModel> {
     return {
       name: this.configFormModels.settings.name,
       key: this.configFormModels.settings.key,
@@ -56,28 +58,29 @@ export class TextFieldDefinition extends AbstractFieldDefinition {
     };
   }
 
-  generateFieldFromCreateModel(value: TextFieldAddNew): FormlyFieldConfig[] {
+  generateFieldFromCreateModel(
+    value: ShortTextFieldAddNew
+  ): FormlyFieldConfig[] {
     return [
       {
         key: value.key,
         type: 'input',
         props: {
           label: value.name,
-          description: value.helpText,
         },
       },
     ];
   }
 
   generateFieldFromConfigModel(
-    value: TextFieldConfigFormModel
+    value: ShortTextFieldConfigFormModel
   ): FormlyFieldConfig[] {
     const validation = value.validation;
 
     return [
       {
         key: value.settings.key,
-        type: value.appearance.displayAs,
+        type: 'input',
         props: {
           label: value.settings.name,
           description: value.appearance.helpText,

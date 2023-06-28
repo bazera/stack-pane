@@ -1,39 +1,27 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { POSSIBLE_APPEARANCES } from '../../field.constant';
 import {
-  FieldAppearance,
+  FieldAddNewBase,
   FieldConfig,
   FieldConfigFormFields,
-  FieldType,
 } from '../../field.model';
-import { validations } from '../../validation';
 import {
-  BooleanFieldAddNew,
+  BooleanFieldCheckboxLabel,
   BooleanFieldConfigFormModel,
+  BooleanFieldDisplayAs,
 } from './boolean.model';
+import {
+  BASE_APPEARANCE,
+  BASE_APPEARANCE_DEFAULT,
+  BASE_SETTINGS,
+  BASE_SETTINGS_CREATE_DEFAULT,
+  BASE_SETTINGS_DEFAULT,
+  BASE_VALIDATION,
+} from '../../field.config';
 
 export class BooleanFieldConfig implements FieldConfig {
   getConfigFormFields(): FieldConfigFormFields {
     return {
-      settings: [
-        {
-          key: 'name',
-          type: 'input',
-          props: {
-            label: 'Name',
-            required: true,
-          },
-        },
-        {
-          key: 'key',
-          type: 'input',
-          props: {
-            label: 'Key',
-            required: true,
-            disabled: true,
-          },
-        },
-      ],
+      settings: [...BASE_SETTINGS],
       values: [
         {
           key: 'default',
@@ -53,44 +41,62 @@ export class BooleanFieldConfig implements FieldConfig {
           },
         },
       ],
-      validation: [validations.required],
+      validation: [...BASE_VALIDATION],
       appearance: [
+        ...BASE_APPEARANCE,
         {
           key: 'displayAs',
           type: 'radio',
           props: {
-            label: 'Display Field As',
-            options: POSSIBLE_APPEARANCES[FieldType.Boolean].map(
-              (value: FieldAppearance) => ({
-                label: value,
-                value,
-              })
-            ),
+            label: 'Display field as',
+            options: [
+              {
+                value: BooleanFieldDisplayAs.Checkbox,
+                label: 'Single checkbox',
+              },
+              {
+                value: BooleanFieldDisplayAs.Radio,
+                label: 'Two radio buttons',
+              },
+            ],
           },
         },
         {
-          key: 'helpText',
-          type: 'textarea',
+          key: 'checkboxLabel',
+          type: 'radio',
           props: {
-            label: 'Help Text',
-            placeholder: '',
-            description: 'Additional information about this field for editors.',
+            label: 'Checkbox label',
+            options: [
+              {
+                value: BooleanFieldCheckboxLabel.FieldName,
+                label: 'Display field name as the label',
+              },
+              {
+                value: BooleanFieldCheckboxLabel.Custom,
+                label: 'Custom label',
+              },
+            ],
+          },
+        },
+        {
+          key: 'customLabel',
+          type: 'input',
+          props: {
+            label: 'Checkbox Label',
           },
         },
         {
           key: 'trueLabel',
           type: 'input',
           props: {
-            label: 'True condition custom label',
-            required: true,
+            label: 'Label for true value',
           },
         },
         {
           key: 'falseLabel',
           type: 'input',
           props: {
-            label: 'False condition custom label',
-            required: true,
+            label: 'Label for false value',
           },
         },
       ],
@@ -132,17 +138,15 @@ export class BooleanFieldConfig implements FieldConfig {
   getConfigModelDefault(): BooleanFieldConfigFormModel {
     return {
       settings: {
-        key: '',
-        name: '',
+        ...BASE_SETTINGS_DEFAULT,
       },
       values: {
         default: true,
       },
       appearance: {
-        displayAs: POSSIBLE_APPEARANCES[FieldType.Boolean][0],
-        helpText: '',
-        trueLabel: 'True',
-        falseLabel: 'False',
+        ...BASE_APPEARANCE_DEFAULT,
+        checkboxLabel: BooleanFieldCheckboxLabel.FieldName,
+        displayAs: BooleanFieldDisplayAs.Checkbox,
       },
       validation: {
         required: {
@@ -152,11 +156,9 @@ export class BooleanFieldConfig implements FieldConfig {
     };
   }
 
-  getAddNewModelDefault(): BooleanFieldAddNew {
+  getAddNewModelDefault(): FieldAddNewBase {
     return {
-      name: '',
-      key: '',
-      helpText: '',
+      ...BASE_SETTINGS_CREATE_DEFAULT,
     };
   }
 }

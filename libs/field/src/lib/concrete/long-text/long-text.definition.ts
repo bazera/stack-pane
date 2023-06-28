@@ -2,24 +2,24 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Field, FieldType } from '../../field.model';
 import { AbstractFieldDefinition } from '../../abstract/definition.abstract';
 import {
-  RichTextFieldAddNew,
-  RichTextFieldConfigFormModel,
-} from './rich-text.model';
-import { RichTextFieldConfig } from './rich-text.config';
+  LongTextFieldAddNew,
+  LongTextFieldConfigFormModel,
+} from './long-text.model';
+import { LongTextFieldConfig } from './long-text.config';
 
-export class RichTextFieldDefinition extends AbstractFieldDefinition {
-  type = FieldType.RichText;
+export class LongTextFieldDefinition extends AbstractFieldDefinition {
+  type = FieldType.LongText;
 
   configFormFields = this.config.getConfigFormFields();
   configFormModels = this.config.getConfigModelDefault();
   addFieldFields = this.config.getAddNewFormFields();
   addFieldModel = this.config.getAddNewModelDefault();
 
-  constructor(private config: RichTextFieldConfig) {
+  constructor(private config: LongTextFieldConfig) {
     super();
   }
 
-  create(): Field<RichTextFieldConfigFormModel> {
+  create(): Field<LongTextFieldConfigFormModel> {
     return {
       name: this.addFieldModel.name,
       key: this.addFieldModel.key,
@@ -34,14 +34,13 @@ export class RichTextFieldDefinition extends AbstractFieldDefinition {
         },
         appearance: {
           ...this.configFormModels.appearance,
-          helpText: this.addFieldModel.helpText,
         },
       },
       fieldConfig: this.generateFieldFromCreateModel(this.addFieldModel),
     };
   }
 
-  update(): Field<RichTextFieldConfigFormModel> {
+  update(): Field<LongTextFieldConfigFormModel> {
     return {
       name: this.configFormModels.settings.name,
       key: this.configFormModels.settings.key,
@@ -56,7 +55,7 @@ export class RichTextFieldDefinition extends AbstractFieldDefinition {
   }
 
   generateFieldFromCreateModel(
-    value: RichTextFieldAddNew
+    value: LongTextFieldAddNew
   ): FormlyFieldConfig[] {
     return [
       {
@@ -64,21 +63,20 @@ export class RichTextFieldDefinition extends AbstractFieldDefinition {
         type: 'input',
         props: {
           label: value.name,
-          description: value.helpText,
         },
       },
     ];
   }
 
   generateFieldFromConfigModel(
-    value: RichTextFieldConfigFormModel
+    value: LongTextFieldConfigFormModel
   ): FormlyFieldConfig[] {
     const validation = value.validation;
 
     return [
       {
         key: value.settings.key,
-        type: value.appearance.displayAs,
+        type: 'textarea',
         props: {
           label: value.settings.name,
           description: value.appearance.helpText,

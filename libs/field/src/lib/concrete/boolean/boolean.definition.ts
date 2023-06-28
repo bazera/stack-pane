@@ -1,11 +1,8 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { Field, FieldType } from '../../field.model';
+import { Field, FieldAddNewBase, FieldType } from '../../field.model';
 import { AbstractFieldDefinition } from '../../abstract/definition.abstract';
 import { BooleanFieldConfig } from './boolean.config';
-import {
-  BooleanFieldAddNew,
-  BooleanFieldConfigFormModel,
-} from './boolean.model';
+import { BooleanFieldConfigFormModel } from './boolean.model';
 
 export class BooleanFieldDefinition extends AbstractFieldDefinition {
   type = FieldType.Boolean;
@@ -36,7 +33,6 @@ export class BooleanFieldDefinition extends AbstractFieldDefinition {
         },
         appearance: {
           ...this.configFormModels.appearance,
-          helpText: this.addFieldModel.helpText,
         },
       },
       fieldConfig: this.generateFieldFromCreateModel(this.addFieldModel),
@@ -57,7 +53,7 @@ export class BooleanFieldDefinition extends AbstractFieldDefinition {
     };
   }
 
-  generateFieldFromCreateModel(value: BooleanFieldAddNew): FormlyFieldConfig[] {
+  generateFieldFromCreateModel(value: FieldAddNewBase): FormlyFieldConfig[] {
     return [
       {
         key: value.key,
@@ -74,7 +70,6 @@ export class BooleanFieldDefinition extends AbstractFieldDefinition {
               label: 'No',
             },
           ],
-          description: value.helpText,
         },
       },
     ];
@@ -88,7 +83,7 @@ export class BooleanFieldDefinition extends AbstractFieldDefinition {
     return [
       {
         key: value.settings.key,
-        type: value.appearance.displayAs,
+        type: 'radio',
         props: {
           label: value.settings.name,
           description: value.appearance.helpText,
